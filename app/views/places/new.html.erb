@@ -1,5 +1,6 @@
 <h1>New Place</h1>
 
+<% if @user != nil %>
 <form action="/places" method="post">
   <p>
     <label for="name_input">Name</label>
@@ -8,3 +9,6 @@
 
   <button>Save</button>
 </form>
+<% else %>
+  You must first <a href="/login">login</a> to post.
+<% end %>
