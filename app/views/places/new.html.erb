@@ -1,14 +1,13 @@
-<h1>New Place</h1>
-
 <% if @user != nil %>
-<form action="/places" method="post">
-  <p>
-    <label for="name_input">Name</label>
-    <input type="text" name="name" id="name_input">
-  </p>
+  <h1>New Place</h1>
+  <form action="/places" method="post">
+    <div class="mb-3">
+      <label for="name_input">Name</label>
+      <input type="text" name="name" id="name_input" class="form-control">
+    </div>
 
-  <button>Save</button>
-</form>
+    <button class="btn btn-primary">Save</button>
+  </form>
 <% else %>
   You must first <a href="/login">login</a> to post.
 <% end %>
