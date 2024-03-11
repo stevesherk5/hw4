@@ -1,28 +1,38 @@
 <h1><%= @place["name"] %></h1>
 
-<div class="my-3">
-  <a href="/entries/new?place_id=<%= @place["id"] %>" class="btn btn-primary">New Entry</a>
-</div>
-
-<div class="mb-3">
-  <h2>My Entries</h2>
-</div>
-
 <% user_entries = @entries.where({"user_id" => session["user_id"]}) %>
-<div class="row">
-  <% for entry in user_entries %>
-    <div class="col-sm-6 col-md-4">
-      <h3><%= entry["title"] %></h3>
-      <h5><%= entry["occurred_on"] %></h5>
-      <% if entry.uploaded_image.attached? %>
-        <img src="<%= url_for(entry.uploaded_image) %>" class="img-fluid rounded">
-      <% end %>
-      <p><%= entry["description"] %></p>
-    </div>
-  <% end %>
+
+<%if user_entries.length != 0%>
+
+  <div class="my-3">
+    <a href="/entries/new?place_id=<%= @place["id"] %>" class="btn btn-primary">New Entry</a>
+  </div>
+
+  <div class="row">
+    <% for entry in user_entries %>
+      <div class="col-sm-6 col-md-4">
+        <h3><%= entry["title"] %></h3>
+        <h5><%= entry["occurred_on"] %></h5>
+        <% if entry.uploaded_image.attached? %>
+          <img src="<%= url_for(entry.uploaded_image) %>" class="img-fluid rounded">
+        <% end %>
+        <p><%= entry["description"] %></p>
+      </div>
+    <% end %>
+  </div>
+
+<% else %>
+
+  <div class="mb-3">
+    <h5>You don't have any entries here. Upload one now!</h5>
+  </div>
+  <div class="my-3">
+    <a href="/entries/new?place_id=<%= @place["id"] %>" class="btn btn-primary">New Entry</a>
+  </div>
+
+<% end %>
+
+
+<div>
+  <a href="/places" class="btn btn-primary">Back to All Places</a>
 </div>
-
-
-<p>
-  <a href="/places" class="link-primary">Back to All Places</a>
-</p>
