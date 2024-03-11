@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    if User.find_by({ "username" => params["username"] }) == nil
+    if User.find_by({ "email" => params["email"] }) == nil
       @user = User.new
       @user["username"] = params["username"]
       @user["email"] = params["email"]
@@ -11,7 +11,7 @@ class UsersController < ApplicationController
       @user.save
       redirect_to "/login"
     else
-      flash["notice"] = "Username taken."
+      flash["notice"] = "Email taken."
       redirect_to "/users/new"
     end
   end
