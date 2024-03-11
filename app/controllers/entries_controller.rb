@@ -13,6 +13,7 @@ class EntriesController < ApplicationController
       @entry["occurred_on"] = params["occurred_on"]
       @entry["place_id"] = params["place_id"]
       @entry["user_id"] = @user["id"]
+      @entry.uploaded_image.attach(params["uploaded_image"])
       @entry.save
     else
       flash["notice"] = "Login first."
