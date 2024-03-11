@@ -4,5 +4,6 @@ class ApplicationController < ActionController::Base
   def current_user
     puts "------------------ code before every request ------------------"
     @current_user = User.find_by({ "id" => session["user_id"] })
+    @places = Place.all
   end
 end
